@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -14,7 +14,7 @@
 #include "history/HistoryManager.h"
 #include "lib/util/format.h"
 #include "main/Application.h"
-#include "main/StellarCoreVersion.h"
+#include "main/epcCoreVersion.h"
 #include "process/ProcessManager.h"
 #include "util/Fs.h"
 #include "util/Logging.h"
@@ -29,7 +29,7 @@
 #include <set>
 #include <sstream>
 
-namespace stellar
+namespace epc
 {
 
 unsigned const HistoryArchiveState::HISTORY_ARCHIVE_STATE_VERSION = 1;
@@ -150,7 +150,7 @@ HistoryArchiveState::fromString(std::string const& str)
 std::string
 HistoryArchiveState::baseName()
 {
-    return std::string("stellar-history.json");
+    return std::string("epc-history.json");
 }
 
 std::string
@@ -265,7 +265,7 @@ HistoryArchiveState::allBuckets() const
     return std::vector<std::string>(buckets.begin(), buckets.end());
 }
 
-HistoryArchiveState::HistoryArchiveState() : server(STELLAR_CORE_VERSION)
+HistoryArchiveState::HistoryArchiveState() : server(epc_CORE_VERSION)
 {
     uint256 u;
     std::string s = binToHex(u);
@@ -280,7 +280,7 @@ HistoryArchiveState::HistoryArchiveState() : server(STELLAR_CORE_VERSION)
 
 HistoryArchiveState::HistoryArchiveState(uint32_t ledgerSeq,
                                          BucketList const& buckets)
-    : server(STELLAR_CORE_VERSION), currentLedger(ledgerSeq)
+    : server(epc_CORE_VERSION), currentLedger(ledgerSeq)
 {
     for (uint32_t i = 0; i < BucketList::kNumLevels; ++i)
     {

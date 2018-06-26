@@ -1,4 +1,4 @@
-// Copyright 2015 Stellar Development Foundation and contributors. Licensed
+// Copyright 2015 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -8,7 +8,7 @@
 #include "history/HistoryManager.h"
 #include "main/Application.h"
 #include "main/Config.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 #include "util/Fs.h"
 #include "util/Logging.h"
 #include "util/TmpDir.h"
@@ -23,7 +23,7 @@
 #include "medida/metrics_registry.h"
 #include "medida/timer.h"
 
-namespace stellar
+namespace epc
 {
 
 std::unique_ptr<BucketManager>
@@ -68,7 +68,7 @@ BucketManagerImpl::BucketManagerImpl(Application& app)
 {
 }
 
-const std::string BucketManagerImpl::kLockFilename = "stellar-core.lock";
+const std::string BucketManagerImpl::kLockFilename = "epc-core.lock";
 
 namespace
 {

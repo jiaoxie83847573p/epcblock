@@ -1,14 +1,14 @@
 #pragma once
 
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
 #include "TxSetFrame.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 #include <string>
 
-namespace stellar
+namespace epc
 {
 
 /**
@@ -22,7 +22,7 @@ class LedgerCloseData
 {
   public:
     LedgerCloseData(uint32_t ledgerSeq, TxSetFramePtr txSet,
-                    StellarValue const& v);
+                    epcValue const& v);
 
     uint32_t
     getLedgerSeq() const
@@ -34,7 +34,7 @@ class LedgerCloseData
     {
         return mTxSet;
     }
-    StellarValue const&
+    epcValue const&
     getValue() const
     {
         return mValue;
@@ -43,10 +43,10 @@ class LedgerCloseData
   private:
     uint32_t mLedgerSeq;
     TxSetFramePtr mTxSet;
-    StellarValue mValue;
+    epcValue mValue;
 };
 
-std::string stellarValueToString(StellarValue const& sv);
+std::string epcValueToString(epcValue const& sv);
 
 #define emptyUpgradeSteps (xdr::xvector<UpgradeType, 6>(0))
 }

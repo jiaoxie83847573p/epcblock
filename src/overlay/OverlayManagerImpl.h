@@ -1,6 +1,6 @@
 #pragma once
 
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -13,7 +13,7 @@
 #include "overlay/Floodgate.h"
 #include "overlay/ItemFetcher.h"
 #include "overlay/OverlayManager.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 #include "util/Timer.h"
 #include <set>
 #include <vector>
@@ -27,7 +27,7 @@ class Counter;
 /*
 Maintain the set of peers we are connected to
 */
-namespace stellar
+namespace epc
 {
 
 class OverlayManagerImpl : public OverlayManager
@@ -70,8 +70,8 @@ class OverlayManagerImpl : public OverlayManager
     ~OverlayManagerImpl();
 
     void ledgerClosed(uint32_t lastClosedledgerSeq) override;
-    void recvFloodedMsg(StellarMessage const& msg, Peer::pointer peer) override;
-    void broadcastMessage(StellarMessage const& msg,
+    void recvFloodedMsg(epcMessage const& msg, Peer::pointer peer) override;
+    void broadcastMessage(epcMessage const& msg,
                           bool force = false) override;
     void connectTo(std::string const& addr) override;
     void connectTo(PeerRecord& pr) override;

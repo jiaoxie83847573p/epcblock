@@ -1,4 +1,4 @@
-// Copyright 2017 Stellar Development Foundation and contributors. Licensed
+// Copyright 2017 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -19,10 +19,10 @@
 
 #include <medida/metrics_registry.h>
 
-using namespace stellar;
+using namespace epc;
 using namespace txtest;
 
-namespace stellar
+namespace epc
 {
 namespace historytestutils
 {
@@ -283,7 +283,7 @@ CatchupSimulation::generateRandomLedger()
                            << " with " << txSet->size() << " txs (txhash:"
                            << hexAbbrev(txSet->getContentsHash()) << ")";
 
-    StellarValue sv(txSet->getContentsHash(), closeTime, emptyUpgradeSteps, 0);
+    epcValue sv(txSet->getContentsHash(), closeTime, emptyUpgradeSteps, 0);
     mLedgerCloseDatas.emplace_back(ledgerSeq, txSet, sv);
     lm.closeLedger(mLedgerCloseDatas.back());
 
@@ -333,7 +333,7 @@ CatchupSimulation::generateAndPublishHistory(size_t nPublishes)
 
         mBucketListAtLastPublish = getApp().getBucketManager().getBucketList();
 
-        // One more ledger is needed to close as stellar-core only publishes
+        // One more ledger is needed to close as epc-core only publishes
         // to just-before-LCL
         generateRandomLedger();
         ++ledgerSeq;

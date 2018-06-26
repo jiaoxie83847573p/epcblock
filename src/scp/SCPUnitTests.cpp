@@ -2,7 +2,7 @@
 #include "scp/LocalNode.h"
 #include "simulation/Simulation.h"
 
-namespace stellar
+namespace epc
 {
 bool
 isNear(uint64 r, double target)

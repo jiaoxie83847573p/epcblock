@@ -1,4 +1,4 @@
-// Copyright 2017 Stellar Development Foundation and contributors. Licensed
+// Copyright 2017 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -15,9 +15,9 @@ namespace cereal
 {
 template <class Archive>
 void
-save(Archive& ar, stellar::Upgrades::UpgradeParameters const& p)
+save(Archive& ar, epc::Upgrades::UpgradeParameters const& p)
 {
-    ar(make_nvp("time", stellar::VirtualClock::to_time_t(p.mUpgradeTime)));
+    ar(make_nvp("time", epc::VirtualClock::to_time_t(p.mUpgradeTime)));
     ar(make_nvp("version", p.mProtocolVersion));
     ar(make_nvp("fee", p.mBaseFee));
     ar(make_nvp("maxtxsize", p.mMaxTxSize));
@@ -26,11 +26,11 @@ save(Archive& ar, stellar::Upgrades::UpgradeParameters const& p)
 
 template <class Archive>
 void
-load(Archive& ar, stellar::Upgrades::UpgradeParameters& o)
+load(Archive& ar, epc::Upgrades::UpgradeParameters& o)
 {
     time_t t;
     ar(make_nvp("time", t));
-    o.mUpgradeTime = stellar::VirtualClock::from_time_t(t);
+    o.mUpgradeTime = epc::VirtualClock::from_time_t(t);
     ar(make_nvp("version", o.mProtocolVersion));
     ar(make_nvp("fee", o.mBaseFee));
     ar(make_nvp("maxtxsize", o.mMaxTxSize));
@@ -38,7 +38,7 @@ load(Archive& ar, stellar::Upgrades::UpgradeParameters& o)
 }
 } // namespace cereal
 
-namespace stellar
+namespace epc
 {
 std::string
 Upgrades::UpgradeParameters::toJson() const

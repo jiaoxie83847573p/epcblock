@@ -1,12 +1,12 @@
 # -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-# Copyright 2015 Stellar Development Foundation and contributors. Licensed
+# Copyright 2015 epc Development Foundation and contributors. Licensed
 # under the Apache License, Version 2.0. See the COPYING file at the root
 # of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
 AC_PREREQ([2.68])
-AC_INIT([stellar-core],[0.1],[],[],[http://www.stellar.org])
+AC_INIT([epc-core],[0.1],[],[],[http://www.epc.org])
 # tar-ustar is required for long file names when libsodium is bundled
 AM_INIT_AUTOMAKE([-Wall -Wextra -Wconversion subdir-objects tar-ustar silent-rules])
 AC_CONFIG_SRCDIR([configure.ac])
@@ -48,7 +48,7 @@ AX_APPEND_COMPILE_FLAGS([-pthread])
 
 AC_ARG_ENABLE([sdfprefs],
     AS_HELP_STRING([--enable-sdfprefs],
-        [Enable build settings preferred by Stellar developers]))
+        [Enable build settings preferred by epc developers]))
 
 AS_IF([test xyes = "x$enable_sdfprefs"],
             [AM_SILENT_RULES([yes])

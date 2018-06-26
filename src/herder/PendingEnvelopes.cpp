@@ -18,7 +18,7 @@ using namespace std;
 #define TXSET_CACHE_SIZE 10000
 #define NODES_QUORUM_CACHE_SIZE 1000
 
-namespace stellar
+namespace epc
 {
 
 PendingEnvelopes::PendingEnvelopes(Application& app, HerderImpl& herder)
@@ -273,7 +273,7 @@ PendingEnvelopes::isDiscarded(SCPEnvelope const& envelope) const
 void
 PendingEnvelopes::envelopeReady(SCPEnvelope const& envelope)
 {
-    StellarMessage msg;
+    epcMessage msg;
     msg.type(SCP_MESSAGE);
     msg.envelope() = envelope;
     mApp.getOverlayManager().broadcastMessage(msg);

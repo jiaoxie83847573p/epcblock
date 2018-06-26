@@ -1,4 +1,4 @@
-// Copyright 2017 Stellar Development Foundation and contributors. Licensed
+// Copyright 2017 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -12,10 +12,10 @@
 #include <lib/catch.hpp>
 #include <lib/util/format.h>
 
-using namespace stellar;
+using namespace epc;
 
 auto max = std::numeric_limits<uint32_t>::max();
-namespace stellar
+namespace epc
 {
 std::vector<std::pair<uint32_t, CatchupConfiguration>> gCatchupRangeCases{
     // fresh database

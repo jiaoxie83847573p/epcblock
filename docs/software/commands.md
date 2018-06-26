@@ -2,25 +2,25 @@
 title: Commands
 ---
 
-stellar-core can be controlled via the following commands.
+epc-core can be controlled via the following commands.
 
 ## Command line options
 * **--?** or **--help**: Print the available command line options and then exit..
-* **--c** Send an [HTTP command](#http-commands) to an already running local instance of stellar-core and then exit. For example: 
+* **--c** Send an [HTTP command](#http-commands) to an already running local instance of epc-core and then exit. For example:
 
-`$ stellar-core -c info`
+`$ epc-core -c info`
 
-* **--conf FILE**: Specify a config file to use. You can use '-' and provide the config file via STDIN. *default 'stellar-core.cfg'*
+* **--conf FILE**: Specify a config file to use. You can use '-' and provide the config file via STDIN. *default 'epc-core.cfg'*
 * **--convertid ID**: Will output the passed ID in all known forms and then exit. Useful for determining the public key that corresponds to a given private key. For example:
 
-`$ stellar-core --convertid SDQVDISRYN2JXBS7ICL7QJAEKB3HWBJFP2QECXG7GZICAHBK4UNJCWK2`
+`$ epc-core --convertid SDQVDISRYN2JXBS7ICL7QJAEKB3HWBJFP2QECXG7GZICAHBK4UNJCWK2`
 
 * **--dumpxdr FILE**:  Dumps the given XDR file and then exits.
 * **--loadxdr FILE**:  Load an XDR bucket file, for testing.
 * **--forcescp**: This command is used to start a network from scratch or when a 
 network has lost quorum because of failed nodes or otherwise. It sets a flag in 
-the database. The next time stellar-core is run, stellar-core will start 
-emitting SCP messages based on its last known ledger. Without this flag stellar-core waits to hear
+the database. The next time epc-core is run, epc-core will start
+emitting SCP messages based on its last known ledger. Without this flag epc-core waits to hear
 a ledger close from the network before starting SCP.<br>
 forcescp doesn't change the requirements for quorum so although this node will emit SCP messages SCP won't complete until there are also a quorum of other nodes also emitting SCP messages on this same ledger.
 * **--fuzz FILE**: Run a single fuzz input and exit.
@@ -33,7 +33,7 @@ forcescp doesn't change the requirements for quorum so although this node will e
 * **--ll LEVEL**: Set the log level. It is redundant with `--c ll` but we need this form if you want to change the log level during test runs.
 * **--metric METRIC**: Report metric METRIC on exit. Used for gathering a metric cumulatively during a test run.
 * **--newdb**: Clears the local database and resets it to the genesis ledger. If you connect to the network after that it will catch up from scratch. 
-* **--newhist ARCH**:  Initialize the named history archive ARCH. ARCH should be one of the history archives you have specified in the stellar-core.cfg. This will write a `.well-known/stellar-history.json` file in the archive root.
+* **--newhist ARCH**:  Initialize the named history archive ARCH. ARCH should be one of the history archives you have specified in the epc-core.cfg. This will write a `.well-known/epc-history.json` file in the archive root.
 * **--printtxn FILE**:  Pretty-print a binary file containing a
   `TransactionEnvelope`.  If FILE is "-", the transaction is read from
   standard input.
@@ -44,22 +44,22 @@ forcescp doesn't change the requirements for quorum so although this node will e
   from standard input, unless FILE is "-" in which case the
   transaction envelope is read from standard input and the signing key
   is read from `/dev/tty`.  In either event, if the signing key
-  appears to be coming from a terminal, stellar-core disables echo.
-  Note that if you do not have a STELLAR_NETWORK_ID environment
+  appears to be coming from a terminal, epc-core disables echo.
+  Note that if you do not have a epc_NETWORK_ID environment
   variable, then before this argument you must specify the --netid
   option.
 * **--base64**: When preceding --printtxn or --signtxn, alters the
   behavior of the option to work on base64-encoded XDR rather than
   raw XDR.
 * **--sec2pub**:  Reads a secret key on standard input and outputs the
-  corresponding public key.  Both keys are in Stellar's standard
+  corresponding public key.  Both keys are in epc's standard
   base-32 ASCII format.
 * **--netid STRING**:  The --signtxn option requires a particular
-  network to sign for.  For example, the production stellar network is
-  "`Public Global Stellar Network ; September 2015`" while the test
+  network to sign for.  For example, the production epc network is
+  "`Public Global epc Network ; September 2015`" while the test
   network is "`Test SDF Network ; September 2015`".
 * **--test**: Run all the unit tests.
-  * Suboptions specific to stellar-core:
+  * Suboptions specific to epc-core:
       * `--all-versions` : run with all possible protocol versions
       * `--version <N>` : run tests for protocol version N, can be specified
       multiple times (default latest)
@@ -69,13 +69,13 @@ forcescp doesn't change the requirements for quorum so although this node will e
   possible options for test.
   * For example this will run just the tests tagged with `[tx]` using protocol
   versions 9 and 10 and stop after the first failure:
-  `stellar-core --test -a --version 9 --version 10 "[tx]"`
+  `epc-core --test -a --version 9 --version 10 "[tx]"`
 * **--version**: Print version info and then exit.
 
 
 ## HTTP Commands
-By default stellar-core listens for connections from localhost on port 11626. 
-You can send commands to stellar-core via a web browser, curl, or using the --c 
+By default epc-core listens for connections from localhost on port 11626.
+You can send commands to epc-core via a web browser, curl, or using the --c
 command line option (see above). Most commands return their results in JSON format.
 
 * **help**
@@ -135,7 +135,7 @@ debugging purpose).
 * **setcursor**
  `/setcursor?id=ID&cursor=N`<br>
   sets or creates a cursor identified by `ID` with value `N`. ID is an uppercase AlphaNum, N is an uint32 that represents the last ledger sequence number that the instance ID processed.
-  Cursors are used by dependent services to tell stellar-core which data can be safely deleted by the instance.
+  Cursors are used by dependent services to tell epc-core which data can be safely deleted by the instance.
   The data is historical data stored in the SQL tables such as txhistory or ledgerheaders. When all consumers processed the data for ledger sequence N the data can be safely removed by the instance.
   The actual deletion is performed by invoking the `maintenance` endpoint or on startup.
   See also `dropcursor`.

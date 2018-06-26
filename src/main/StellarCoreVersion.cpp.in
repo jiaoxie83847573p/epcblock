@@ -1,4 +1,4 @@
-#include "main/StellarCoreVersion.h"
+#include "main/epcCoreVersion.h"
 
-const std::string STELLAR_CORE_VERSION = "%%VERSION%%";
+const std::string epc_CORE_VERSION = "%%VERSION%%";
 

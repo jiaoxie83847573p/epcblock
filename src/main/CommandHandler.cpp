@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -30,12 +30,12 @@
 #include "test/TxTests.h"
 #include <regex>
 
-using namespace stellar::txtest;
+using namespace epc::txtest;
 
 using std::placeholders::_1;
 using std::placeholders::_2;
 
-namespace stellar
+namespace epc
 {
 CommandHandler::CommandHandler(Application& app) : mApp(app)
 {
@@ -240,7 +240,7 @@ CommandHandler::testTx(std::string const& params, std::string& retStr)
 void
 CommandHandler::fileNotFound(std::string const& params, std::string& retStr)
 {
-    retStr = "<b>Welcome to stellar-core!</b><p>";
+    retStr = "<b>Welcome to epc-core!</b><p>";
     retStr += "supported commands:<p/>";
 
     retStr +=
@@ -328,7 +328,7 @@ CommandHandler::fileNotFound(std::string const& params, std::string& retStr)
         "identified by `ID` with value `N`. ID is an uppercase AlphaNum, N is "
         "an uint32 that represents the last ledger sequence number that the "
         "instance ID processed."
-        "Cursors are used by dependent services to tell stellar - core which "
+        "Cursors are used by dependent services to tell epc - core which "
         "data can be safely deleted by the instance."
         "The data is historical data stored in the SQL tables such as "
         "txhistory or ledgerheaders.When all consumers processed the data for "
@@ -362,7 +362,7 @@ CommandHandler::manualClose(std::string const& params, std::string& retStr)
     else
     {
         retStr =
-            "Set MANUAL_CLOSE=true in the stellar-core.cfg if you want this "
+            "Set MANUAL_CLOSE=true in the epc-core.cfg if you want this "
             "behavior";
     }
 }
@@ -471,7 +471,7 @@ CommandHandler::generateLoad(std::string const& params, std::string& retStr)
     else
     {
         retStr = "Set ARTIFICIALLY_GENERATE_LOAD_FOR_TESTING=true in "
-                 "the stellar-core.cfg if you want this behavior";
+                 "the epc-core.cfg if you want this behavior";
     }
 }
 
@@ -874,7 +874,7 @@ CommandHandler::tx(std::string const& params, std::string& retStr)
 
             if (status == Herder::TX_STATUS_PENDING)
             {
-                StellarMessage msg;
+                epcMessage msg;
                 msg.type(TRANSACTION);
                 msg.transaction() = envelope;
                 mApp.getOverlayManager().broadcastMessage(msg);

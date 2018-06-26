@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -33,7 +33,7 @@
 #include <algorithm>
 #include <future>
 
-using namespace stellar;
+using namespace epc;
 
 namespace BucketTests
 {
@@ -709,8 +709,8 @@ TEST_CASE("single entry bubbling up", "[bucket][bucketbubble]")
     {
         Application::pointer app = createTestApplication(clock, cfg);
         BucketList bl;
-        std::vector<stellar::LedgerKey> emptySet;
-        std::vector<stellar::LedgerEntry> emptySetEntry;
+        std::vector<epc::LedgerKey> emptySet;
+        std::vector<epc::LedgerEntry> emptySetEntry;
 
         CLOG(DEBUG, "Bucket") << "Adding single entry in lowest level";
         bl.addBatch(*app, 1, LedgerTestUtils::generateValidLedgerEntries(1),
@@ -770,7 +770,7 @@ closeLedger(Application& app)
         << " with lcl=" << hexAbbrev(lclHash) << ", buckets="
         << hexAbbrev(app.getBucketManager().getBucketList().getHash());
     auto txSet = std::make_shared<TxSetFrame>(lclHash);
-    StellarValue sv(txSet->getContentsHash(), lm.getCloseTime(),
+    epcValue sv(txSet->getContentsHash(), lm.getCloseTime(),
                     emptyUpgradeSteps, 0);
     LedgerCloseData lcd(lm.getLedgerNum(), txSet, sv);
     lm.valueExternalized(lcd);
@@ -779,8 +779,8 @@ closeLedger(Application& app)
 
 TEST_CASE("bucket persistence over app restart", "[bucket][bucketpersist]")
 {
-    std::vector<stellar::LedgerKey> emptySet;
-    std::vector<stellar::LedgerEntry> emptySetEntry;
+    std::vector<epc::LedgerKey> emptySet;
+    std::vector<epc::LedgerEntry> emptySetEntry;
 
     VirtualClock clock;
     Config cfg0(getTestConfig(0, Config::TESTDB_ON_DISK_SQLITE));
@@ -1036,7 +1036,7 @@ TEST_CASE("checkdb succeeding", "[bucket][checkdb]")
     Application::pointer app = createTestApplication(clock, cfg);
     app->start();
 
-    std::vector<stellar::LedgerKey> emptySet;
+    std::vector<epc::LedgerKey> emptySet;
 
     // Create accounts
     app->generateLoad(true, 1000, 0, 0, 1000, 100, false);

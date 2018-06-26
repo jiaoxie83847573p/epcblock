@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -7,7 +7,7 @@
 #include "util/asio.h"
 
 #include "main/Config.h"
-#include "main/StellarCoreVersion.h"
+#include "main/epcCoreVersion.h"
 #include "test.h"
 #include "test/TestUtils.h"
 #include "util/Logging.h"
@@ -36,7 +36,7 @@ SimpleTestReporter::~SimpleTestReporter()
 }
 }
 
-namespace stellar
+namespace epc
 {
 
 static std::vector<std::string> gTestMetrics;
@@ -46,7 +46,7 @@ static bool gTestAllVersions{false};
 static std::vector<uint32> gVersionsToTest;
 static int gBaseInstance{0};
 
-bool force_sqlite = (std::getenv("STELLAR_FORCE_SQLITE") != nullptr);
+bool force_sqlite = (std::getenv("epc_FORCE_SQLITE") != nullptr);
 
 Config const&
 getTestConfig(int instanceNumber, Config::TestDbMode mode)
@@ -68,7 +68,7 @@ getTestConfig(int instanceNumber, Config::TestDbMode mode)
 
     if (!cfgs[instanceNumber])
     {
-        gTestRoots.emplace_back("stellar-core-test");
+        gTestRoots.emplace_back("epc-core-test");
 
         std::string rootDir = gTestRoots.back().getName();
         rootDir += "/";
@@ -79,7 +79,7 @@ getTestConfig(int instanceNumber, Config::TestDbMode mode)
 
         std::ostringstream sstream;
 
-        sstream << "stellar" << instanceNumber << ".log";
+        sstream << "epc" << instanceNumber << ".log";
         thisConfig.LOG_FILE_PATH = sstream.str();
         thisConfig.BUCKET_DIR_PATH = rootDir + "bucket";
 
@@ -158,14 +158,14 @@ test(int argc, char* const* argv, el::Level ll,
     gTestMetrics = metrics;
 
     // Note: Have to setLogLevel twice here to ensure --list-test-names-only is
-    // not mixed with stellar-core logging.
+    // not mixed with epc-core logging.
     Logging::setFmt("<test>");
     Logging::setLogLevel(ll, nullptr);
     Config const& cfg = getTestConfig();
     Logging::setLoggingToFile(cfg.LOG_FILE_PATH);
     Logging::setLogLevel(ll, nullptr);
 
-    LOG(INFO) << "Testing stellar-core " << STELLAR_CORE_VERSION;
+    LOG(INFO) << "Testing epc-core " << epc_CORE_VERSION;
     LOG(INFO) << "Logging to " << cfg.LOG_FILE_PATH;
 
     using namespace Catch;
@@ -177,7 +177,7 @@ test(int argc, char* const* argv, el::Level ll,
                       "version")["--version"]("Test specific version(s)");
     cli |= clara::Opt(gBaseInstance, "offset")["--base-instance"](
         "Instance number offset so multiple instances of "
-        "stellar-core can run tests concurrently");
+        "epc-core can run tests concurrently");
     session.cli(cli);
 
     auto r = session.applyCommandLine(argc, argv);

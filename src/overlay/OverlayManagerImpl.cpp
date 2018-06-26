@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -44,7 +44,7 @@ If any verify step fails, the peer disconnects immediately.
 
 */
 
-namespace stellar
+namespace epc
 {
 
 using namespace soci;
@@ -525,7 +525,7 @@ OverlayManagerImpl::getRandomAuthenticatedPeers()
 }
 
 void
-OverlayManagerImpl::recvFloodedMsg(StellarMessage const& msg,
+OverlayManagerImpl::recvFloodedMsg(epcMessage const& msg,
                                    Peer::pointer peer)
 {
     mMessagesReceived.Mark();
@@ -533,7 +533,7 @@ OverlayManagerImpl::recvFloodedMsg(StellarMessage const& msg,
 }
 
 void
-OverlayManagerImpl::broadcastMessage(StellarMessage const& msg, bool force)
+OverlayManagerImpl::broadcastMessage(epcMessage const& msg, bool force)
 {
     mMessagesBroadcast.Mark();
     mFloodGate.broadcast(msg, force);

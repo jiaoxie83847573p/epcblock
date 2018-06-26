@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <numeric>
 
-namespace stellar
+namespace epc
 {
 
 using namespace std;
@@ -613,10 +613,10 @@ TransactionFrame::apply(LedgerDelta& delta, TransactionMetaV1& meta,
     return valid && applyOperations(signatureChecker, delta, meta, app);
 }
 
-StellarMessage
-TransactionFrame::toStellarMessage() const
+epcMessage
+TransactionFrame::toepcMessage() const
 {
-    StellarMessage msg;
+    epcMessage msg;
     msg.type(TRANSACTION);
     msg.transaction() = mEnvelope;
     return msg;

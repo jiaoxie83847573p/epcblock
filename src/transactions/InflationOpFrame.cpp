@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -9,7 +9,7 @@
 #include "main/Application.h"
 #include "medida/meter.h"
 #include "medida/metrics_registry.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 
 const uint32_t INFLATION_FREQUENCY = (60 * 60 * 24 * 7); // every 7 days
 // inflation is .000190721 per 7 days, or 1% a year
@@ -19,7 +19,7 @@ const int64_t INFLATION_WIN_MIN_PERCENT = 500000000LL; // .05%
 const int INFLATION_NUM_WINNERS = 2000;
 const time_t INFLATION_START_TIME = (1404172800LL); // 1-jul-2014 (unix epoch)
 
-namespace stellar
+namespace epc
 {
 InflationOpFrame::InflationOpFrame(Operation const& op, OperationResult& res,
                                    TransactionFrame& parentTx)

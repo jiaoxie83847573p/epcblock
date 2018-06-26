@@ -1,18 +1,18 @@
-// Copyright 2015 Stellar Development Foundation and contributors. Licensed
+// Copyright 2015 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
-%#include "xdr/Stellar-SCP.h"
-%#include "xdr/Stellar-transaction.h"
+%#include "xdr/epc-SCP.h"
+%#include "xdr/epc-transaction.h"
 
-namespace stellar
+namespace epc
 {
 
 typedef opaque UpgradeType<128>;
 
-/* StellarValue is the value used by SCP to reach consensus on a given ledger
+/* epcValue is the value used by SCP to reach consensus on a given ledger
 */
-struct StellarValue
+struct epcValue
 {
     Hash txSetHash;   // transaction set to apply to previous ledger
     uint64 closeTime; // network close time
@@ -40,7 +40,7 @@ struct LedgerHeader
 {
     uint32 ledgerVersion;    // the protocol version of the ledger
     Hash previousLedgerHash; // hash of the previous ledger header
-    StellarValue scpValue;   // what consensus agreed to
+    epcValue scpValue;   // what consensus agreed to
     Hash txSetResultHash;    // the TransactionResultSet that led to this ledger
     Hash bucketListHash;     // hash of the ledger state
 
@@ -75,7 +75,7 @@ struct LedgerHeader
 };
 
 /* Ledger upgrades
-note that the `upgrades` field from StellarValue is normalized such that
+note that the `upgrades` field from epcValue is normalized such that
 it only contains one entry per LedgerUpgradeType, and entries are sorted
 in ascending order
 */

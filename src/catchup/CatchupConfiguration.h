@@ -1,12 +1,12 @@
 #pragma once
 
-// Copyright 2017 Stellar Development Foundation and contributors. Licensed
+// Copyright 2017 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
 #include <cstdint>
 
-namespace stellar
+namespace epc
 {
 
 // Each catchup can be configured by two parameters destination ledger and count
@@ -26,7 +26,7 @@ namespace stellar
 // which means that CatchupWork will get latest checkpoint from history archive
 // and catchup to that instead of destination ledger. This is usefull when
 // doing offline commandline catchups with --catchup-complete, --catchup-at,
-// --catchup-to and --catchup-recent arguments to stellar-core.
+// --catchup-to and --catchup-recent arguments to epc-core.
 class CatchupConfiguration
 {
   public:

@@ -1,6 +1,6 @@
 #pragma once
 
-// Copyright 2016 Stellar Development Foundation and contributors. Licensed
+// Copyright 2016 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -13,7 +13,7 @@ namespace soci
 class session;
 }
 
-namespace stellar
+namespace epc
 {
 class LedgerRange;
 class ManageDataOpFrame;
@@ -44,7 +44,7 @@ class DataFrame : public EntryFrame
     }
 
     std::string const& getName() const;
-    stellar::DataValue const& getValue() const;
+    epc::DataValue const& getValue() const;
     AccountID const& getAccountID() const;
 
     DataEntry const&

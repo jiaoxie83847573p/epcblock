@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -15,7 +15,7 @@
 using namespace std;
 using namespace soci;
 
-namespace stellar
+namespace epc
 {
 // note: the primary key omits assettype as assetcodes are non overlapping
 const char* TrustFrame::kSQLCreateStatement1 =
@@ -120,7 +120,7 @@ TrustFrame::addBalance(int64_t delta)
     {
         return false;
     }
-    return stellar::addBalance(mTrustLine.balance, delta, mTrustLine.limit);
+    return epc::addBalance(mTrustLine.balance, delta, mTrustLine.limit);
 }
 
 int64_t

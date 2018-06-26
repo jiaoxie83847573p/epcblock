@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -30,11 +30,11 @@
 #include "util/XDROperators.h"
 #include "util/types.h"
 
-using namespace stellar;
-using namespace stellar::txtest;
+using namespace epc;
+using namespace epc::txtest;
 
 typedef std::unique_ptr<Application> appPtr;
-namespace stellar
+namespace epc
 {
 namespace txtest
 {
@@ -210,7 +210,7 @@ closeLedgerOn(Application& app, uint32 ledgerSeq, int day, int month, int year,
     txSet->sortForHash();
     REQUIRE(txSet->checkValid(app));
 
-    StellarValue sv(txSet->getContentsHash(), getTestDate(day, month, year),
+    epcValue sv(txSet->getContentsHash(), getTestDate(day, month, year),
                     emptyUpgradeSteps, 0);
     LedgerCloseData ledgerData(ledgerSeq, txSet, sv);
     app.getLedgerManager().closeLedger(ledgerData);

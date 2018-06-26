@@ -1,4 +1,4 @@
-// Copyright 2017 Stellar Development Foundation and contributors. Licensed
+// Copyright 2017 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -14,8 +14,8 @@
 #include <deque>
 #include <limits>
 
-using namespace stellar;
-using namespace stellar::txtest;
+using namespace epc;
+using namespace epc::txtest;
 
 namespace
 {
@@ -53,13 +53,13 @@ assetToString(const Asset& asset)
     auto r = std::string{};
     switch (asset.type())
     {
-    case stellar::ASSET_TYPE_NATIVE:
+    case epc::ASSET_TYPE_NATIVE:
         r = std::string{"XLM"};
         break;
-    case stellar::ASSET_TYPE_CREDIT_ALPHANUM4:
+    case epc::ASSET_TYPE_CREDIT_ALPHANUM4:
         assetCodeToStr(asset.alphaNum4().assetCode, r);
         break;
-    case stellar::ASSET_TYPE_CREDIT_ALPHANUM12:
+    case epc::ASSET_TYPE_CREDIT_ALPHANUM12:
         assetCodeToStr(asset.alphaNum12().assetCode, r);
         break;
     }
@@ -281,7 +281,7 @@ TEST_CASE("pathpayment", "[tx][pathpayment]")
     SECTION("path payment XLM with not enough funds")
     {
         auto market = TestMarket{*app};
-        // see https://github.com/stellar/stellar-core/pull/1239
+        // see https://github.com/epc/epc-core/pull/1239
         auto minimumAccount =
             root.create("minimum-account", minBalanceNoTx + 2 * txfee + 20);
         for_all_versions(*app, [&] {

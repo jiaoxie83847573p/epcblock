@@ -1,4 +1,4 @@
-// Copyright 2016 Stellar Development Foundation and contributors. Licensed
+// Copyright 2016 epc Development Foundation and contributors. Licensed
 // under the ISC License. See the COPYING file at the top-level directory of
 // this distribution or at http://opensource.org/licenses/ISC
 
@@ -13,8 +13,8 @@
 #include "util/Logging.h"
 #include "xdrpp/marshal.h"
 
-using namespace stellar;
-using namespace stellar::txtest;
+using namespace epc;
+using namespace epc::txtest;
 
 // add data
 // change data

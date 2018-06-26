@@ -1,4 +1,4 @@
-# SCP (Stellar Consensus Protocol)
+# SCP (epc Consensus Protocol)
 
 The SCP subsystem is an abstract implementation of SCP, a protocol for federated
 byzantine agreement, intended to drive a distributed system built around the
@@ -15,12 +15,12 @@ The central [SCP class](SCP.h) should be subclassed by any module wishing to
 implement consensus using the SCP protocol, implementing the necessary abstract
 methods for handling SCP-generated events, and calling SCP base-class methods to
 receive incoming messages. The messages making up the protocol are defined in
-XDR, in the file [Stellar-SCP.x](../xdr/Stellar-SCP.x)
+XDR, in the file [epc-SCP.x](../xdr/epc-SCP.x)
 
-The `stellar-core` program has a single subclass of SCP called
+The `epc-core` program has a single subclass of SCP called
 [Herder](../herder), which gives a specific interpretation to "slot" and
 "value", and connects SCP up with a specific broadcast communication medium
 ([Overlay](../overlay)) and specific replicated state machine
 ([LedgerManager](../ledger)).
 
-For details of the protocol itself, see the [paper on SCP](https://www.stellar.org/papers/stellar-consensus-protocol.pdf).
+For details of the protocol itself, see the [paper on SCP](https://www.epc.org/papers/epc-consensus-protocol.pdf).

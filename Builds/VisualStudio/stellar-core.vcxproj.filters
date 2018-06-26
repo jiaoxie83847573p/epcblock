@@ -852,7 +852,7 @@
     <ClCompile Include="..\..\src\database\DatabaseUtils.cpp">
       <Filter>database</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\main\StellarCoreVersion.cpp">
+    <ClCompile Include="..\..\src\main\epcCoreVersion.cpp">
       <Filter>main\generated</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\overlay\PeerBareAddress.cpp">
@@ -1175,22 +1175,22 @@
     <ClInclude Include="..\..\src\main\dumpxdr.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="src\generated\xdr\Stellar-ledger.h">
+    <ClInclude Include="src\generated\xdr\epc-ledger.h">
       <Filter>xdr\generated</Filter>
     </ClInclude>
-    <ClInclude Include="src\generated\xdr\Stellar-ledger-entries.h">
+    <ClInclude Include="src\generated\xdr\epc-ledger-entries.h">
       <Filter>xdr\generated</Filter>
     </ClInclude>
-    <ClInclude Include="src\generated\xdr\Stellar-overlay.h">
+    <ClInclude Include="src\generated\xdr\epc-overlay.h">
       <Filter>xdr\generated</Filter>
     </ClInclude>
-    <ClInclude Include="src\generated\xdr\Stellar-SCP.h">
+    <ClInclude Include="src\generated\xdr\epc-SCP.h">
       <Filter>xdr\generated</Filter>
     </ClInclude>
-    <ClInclude Include="src\generated\xdr\Stellar-transaction.h">
+    <ClInclude Include="src\generated\xdr\epc-transaction.h">
       <Filter>xdr\generated</Filter>
     </ClInclude>
-    <ClInclude Include="src\generated\xdr\Stellar-types.h">
+    <ClInclude Include="src\generated\xdr\epc-types.h">
       <Filter>xdr\generated</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\main\ExternalQueue.h">
@@ -1211,7 +1211,7 @@
     <ClInclude Include="..\..\src\overlay\LoadManager.h">
       <Filter>overlay</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\overlay\StellarXDR.h">
+    <ClInclude Include="..\..\src\overlay\epcXDR.h">
       <Filter>overlay</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\transactions\ManageDataOpFrame.h">
@@ -1490,7 +1490,7 @@
     <ClInclude Include="..\..\src\transactions\BumpSequenceOpFrame.h">
       <Filter>transactions</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\main\StellarCoreVersion.h">
+    <ClInclude Include="..\..\src\main\epcCoreVersion.h">
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\overlay\PeerBareAddress.h">
@@ -1558,13 +1558,13 @@
     <None Include="..\..\docs\readme.md">
       <Filter>docs</Filter>
     </None>
-    <None Include="..\..\docs\stellar-core_example.cfg">
+    <None Include="..\..\docs\epc-core_example.cfg">
       <Filter>docs</Filter>
     </None>
-    <None Include="..\..\docs\stellar-core_standalone.cfg">
+    <None Include="..\..\docs\epc-core_standalone.cfg">
       <Filter>docs</Filter>
     </None>
-    <None Include="..\..\docs\stellar-core_testnet.cfg">
+    <None Include="..\..\docs\epc-core_testnet.cfg">
       <Filter>docs</Filter>
     </None>
     <None Include="..\..\docs\transaction.md">
@@ -1593,34 +1593,34 @@
     <None Include="..\..\src\history\readme.md">
       <Filter>history</Filter>
     </None>
-    <None Include="..\..\src\history\serialize-tests\stellar-history.livenet.15686975.json">
+    <None Include="..\..\src\history\serialize-tests\epc-history.livenet.15686975.json">
       <Filter>history\tests\serialize-tests</Filter>
     </None>
-    <None Include="..\..\src\history\serialize-tests\stellar-history.testnet.6714239.json">
+    <None Include="..\..\src\history\serialize-tests\epc-history.testnet.6714239.json">
       <Filter>history\tests\serialize-tests</Filter>
     </None>
     <None Include="..\..\performance-eval.md" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\..\src\xdr\Stellar-ledger.x">
+    <CustomBuild Include="..\..\src\xdr\epc-ledger.x">
       <Filter>xdr</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\src\xdr\Stellar-transaction.x">
+    <CustomBuild Include="..\..\src\xdr\epc-transaction.x">
       <Filter>xdr</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\src\xdr\Stellar-types.x">
+    <CustomBuild Include="..\..\src\xdr\epc-types.x">
       <Filter>xdr</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\src\xdr\Stellar-overlay.x">
+    <CustomBuild Include="..\..\src\xdr\epc-overlay.x">
       <Filter>xdr</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\src\xdr\Stellar-ledger-entries.x">
+    <CustomBuild Include="..\..\src\xdr\epc-ledger-entries.x">
       <Filter>xdr</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\src\xdr\Stellar-SCP.x">
+    <CustomBuild Include="..\..\src\xdr\epc-SCP.x">
       <Filter>xdr</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\src\main\StellarCoreVersion.cpp.in">
+    <CustomBuild Include="..\..\src\main\epcCoreVersion.cpp.in">
       <Filter>main</Filter>
     </CustomBuild>
   </ItemGroup>

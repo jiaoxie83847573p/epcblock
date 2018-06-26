@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -23,8 +23,8 @@
 #include "util/Logging.h"
 #include "util/Timer.h"
 
-using namespace stellar;
-using namespace stellar::txtest;
+using namespace epc;
+using namespace epc::txtest;
 
 typedef std::unique_ptr<Application> appPtr;
 
@@ -486,9 +486,9 @@ TEST_CASE("txenvelope", "[tx][envelope]")
 
                         for_versions_from(3, *app, [&] {
                             applyCheck(tx, *app);
-                            REQUIRE(tx->getResultCode() == stellar::txFAILED);
+                            REQUIRE(tx->getResultCode() == epc::txFAILED);
                             REQUIRE(PaymentOpFrame::getInnerCode(getFirstResult(
-                                        *tx)) == stellar::PAYMENT_MALFORMED);
+                                        *tx)) == epc::PAYMENT_MALFORMED);
                             REQUIRE(getAccountSigners(a1, *app).size() == 1);
                         });
                     }
@@ -946,7 +946,7 @@ TEST_CASE("txenvelope", "[tx][envelope]")
         txSet->add(txFrame);
 
         // close this ledger
-        StellarValue sv(txSet->getContentsHash(), 1, emptyUpgradeSteps, 0);
+        epcValue sv(txSet->getContentsHash(), 1, emptyUpgradeSteps, 0);
         LedgerCloseData ledgerData(1, txSet, sv);
         app->getLedgerManager().closeLedger(ledgerData);
 

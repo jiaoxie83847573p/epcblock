@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -7,7 +7,7 @@
 #include "database/DatabaseConnectionString.h"
 #include "main/Application.h"
 #include "main/Config.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 #include "util/GlobalChecks.h"
 #include "util/Logging.h"
 #include "util/Timer.h"
@@ -45,7 +45,7 @@ extern "C" void register_factory_postgresql();
 // NOTE: soci will just crash and not throw
 //  if you misname a column in a query. yay!
 
-namespace stellar
+namespace epc
 {
 
 using namespace soci;

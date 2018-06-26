@@ -1,11 +1,11 @@
 #pragma once
 
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
 #include "medida/timer_context.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 #include "util/NonCopyable.h"
 #include "util/Timer.h"
 #include "util/lrucache.hpp"
@@ -20,7 +20,7 @@ class Timer;
 class Counter;
 }
 
-namespace stellar
+namespace epc
 {
 class Application;
 class SQLLogContext;
@@ -167,7 +167,7 @@ class Database : NonMovableOrCopyable
     bool canUsePool() const;
 
     // Drop and recreate all tables in the database target. This is called
-    // by the --newdb command-line flag on stellar-core.
+    // by the --newdb command-line flag on epc-core.
     void initialize();
 
     // Save `vers` as schema version.

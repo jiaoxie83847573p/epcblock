@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -23,7 +23,7 @@
 #include <lib/catch.hpp>
 #include <lib/util/format.h>
 
-using namespace stellar;
+using namespace epc;
 using namespace historytestutils;
 
 TEST_CASE("next checkpoint ledger", "[history]")
@@ -180,7 +180,7 @@ TEST_CASE("History publish queueing", "[history][historydelay][historycatchup]")
     {
         catchupSimulation.generateRandomLedger();
     }
-    // One more ledger is needed to close as stellar-core only publishes to
+    // One more ledger is needed to close as epc-core only publishes to
     // just-before-LCL
     catchupSimulation.generateRandomLedger();
 
@@ -381,7 +381,7 @@ TEST_CASE("Repair missing buckets fails", "[history][historybucketrepair]")
         }
         catch (...)
         {
-            // see https://github.com/stellar/stellar-core/issues/1250
+            // see https://github.com/epc/epc-core/issues/1250
             // we expect to get "Unable to restore last-known ledger state"
             // several more times
         }
@@ -592,7 +592,7 @@ TEST_CASE("Catchup manual", "[history][catchupmanual]")
         catchupSimulation.getApp().getLedgerManager().getLastClosedLedgerNum() -
         2;
 
-    for (auto const& test : stellar::gCatchupRangeCases)
+    for (auto const& test : epc::gCatchupRangeCases)
     {
         // test only 5% of those configurations
         if (std::rand() % 20 == 0)

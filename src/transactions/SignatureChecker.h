@@ -1,19 +1,19 @@
 #pragma once
 
-// Copyright 2016 Stellar Development Foundation and contributors. Licensed
+// Copyright 2016 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
-#include "xdr/Stellar-ledger-entries.h"
-#include "xdr/Stellar-transaction.h"
-#include "xdr/Stellar-types.h"
+#include "xdr/epc-ledger-entries.h"
+#include "xdr/epc-transaction.h"
+#include "xdr/epc-types.h"
 
 #include <map>
 #include <set>
 #include <stdint.h>
 #include <vector>
 
-namespace stellar
+namespace epc
 {
 
 using UsedOneTimeSignerKeys = std::map<AccountID, std::set<SignerKey>>;

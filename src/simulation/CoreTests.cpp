@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -16,7 +16,7 @@
 #include "lib/util/format.h"
 #include "main/Application.h"
 #include "medida/stats/snapshot.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 #include "simulation/Topologies.h"
 #include "test/test.h"
 #include "transactions/TransactionFrame.h"
@@ -27,7 +27,7 @@
 #include "xdrpp/autocheck.h"
 #include <sstream>
 
-using namespace stellar;
+using namespace epc;
 
 typedef std::unique_ptr<Application> appPtr;
 

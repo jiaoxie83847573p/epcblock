@@ -1,4 +1,4 @@
-// Copyright 2015 Stellar Development Foundation and contributors. Licensed
+// Copyright 2015 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -8,7 +8,7 @@
 #include "historywork/PutRemoteFileWork.h"
 #include "util/Logging.h"
 
-namespace stellar
+namespace epc
 {
 
 PutHistoryArchiveStateWork::PutHistoryArchiveStateWork(
@@ -69,7 +69,7 @@ PutHistoryArchiveStateWork::onSuccess()
             addWork<PutRemoteFileWork>(mLocalFilename, seqName, mArchive);
         mPutRemoteFileWork->addWork<MakeRemoteDirWork>(seqDir, mArchive);
 
-        // Also put it in the .well-known/stellar-history.json file
+        // Also put it in the .well-known/epc-history.json file
         auto wkName = HistoryArchiveState::wellKnownRemoteName();
         auto wkDir = HistoryArchiveState::wellKnownRemoteDir();
         auto wkWork =

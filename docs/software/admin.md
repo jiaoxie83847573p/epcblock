@@ -4,20 +4,20 @@ title: Administration
 
 ## Purpose of this document
 
-This document describes various aspects of running `stellar-core` for **system administrators** (but may be useful to a broader audience).
+This document describes various aspects of running `epc-core` for **system administrators** (but may be useful to a broader audience).
 
 ## Introduction
 
-Stellar Core is responsible for communicating directly with and maintaining the Stellar peer-to-peer network. For a high-level introduction to Stellar Core, [watch this talk](https://www.youtube.com/watch?v=pt_mm8S9_WU) on the architecture and ledger basics:
+epc Core is responsible for communicating directly with and maintaining the epc peer-to-peer network. For a high-level introduction to epc Core, [watch this talk](https://www.youtube.com/watch?v=pt_mm8S9_WU) on the architecture and ledger basics:
 
-[![Introduction to Stellar Core](https://i.ytimg.com/vi/pt_mm8S9_WU/hqdefault.jpg "Introduction to Stellar Core")](https://www.youtube.com/watch?v=pt_mm8S9_WU)
+[![Introduction to epc Core](https://i.ytimg.com/vi/pt_mm8S9_WU/hqdefault.jpg "Introduction to epc Core")](https://www.youtube.com/watch?v=pt_mm8S9_WU)
 
-It will also be useful to understand how [data flows](https://www.stellar.org/developers/stellar-core/software/core-data-flow.pdf) and is stored in the system.
+It will also be useful to understand how [data flows](https://www.epc.org/developers/epc-core/software/core-data-flow.pdf) and is stored in the system.
 
 ## Zero to completed: node checklist
  - [ ] [deciding to run a node](#why-run-a-node)
  - [ ] [setting up an instance to run core](#instance-setup)
- - [ ] [install stellar-core](#installing)
+ - [ ] [install epc-core](#installing)
  - [ ] [craft a configuration](#configuring)
  - [ ] [crafting  a quorum set](#crafting-a-quorum-set)
  - [ ] [preparing the environment before the first run](#environment-preparation)
@@ -40,7 +40,7 @@ You get to run your own Horizon instance:
   * Open Horizon increases customer trust by allowing to query at the source (ie: larger token issuers have an official endpoint that can be queried)
 * Control of SLA
 
-note: in this document we use "Horizon" as the example implementation of a first tier service built on top of stellar-core, but any other system would get the same benefits.
+note: in this document we use "Horizon" as the example implementation of a first tier service built on top of epc-core, but any other system would get the same benefits.
 
 ### Level of participation to the network
 
@@ -123,27 +123,27 @@ Use cases:
 * a [database](#database)
 
 ## Instance setup
-Regardless of how you install stellar-core (apt, source, docker, etc), you will need to configure the instance hosting it roughly the same way.
+Regardless of how you install epc-core (apt, source, docker, etc), you will need to configure the instance hosting it roughly the same way.
 
 ### Compute requirements
 CPU, RAM, Disk and network depends on network activity. If you decide to collocate certain workloads, you will need to take this into account.
 
-As of early 2018, stellar-core with PostgreSQL running on the same machine has no problem running on a [m5.large](https://aws.amazon.com/ec2/instance-types/m5/) in AWS (dual core 2.5 GHz Intel Xeon, 8 GB RAM).
+As of early 2018, epc-core with PostgreSQL running on the same machine has no problem running on a [m5.large](https://aws.amazon.com/ec2/instance-types/m5/) in AWS (dual core 2.5 GHz Intel Xeon, 8 GB RAM).
 
 Storage wise, 20 GB seems to be an excellent working set as it leaves plenty of room for growth.
 
 ### Network access
 
 #### Interaction with the peer to peer network
-* **inbound**: stellar-core needs to allow all ips to connect to its `PEER_PORT` (default 11625) over TCP.
-* **outbound**: stellar-core needs access to connect to other peers on the internet on `PEER_PORT` (most use the default as well) over TCP.
+* **inbound**: epc-core needs to allow all ips to connect to its `PEER_PORT` (default 11625) over TCP.
+* **outbound**: epc-core needs access to connect to other peers on the internet on `PEER_PORT` (most use the default as well) over TCP.
 
 #### Interaction with other internal systems
 
 * **outbound**:
-  * stellar-core needs access to a database (postgresql for example), which may reside on a different machine on the network
+  * epc-core needs access to a database (postgresql for example), which may reside on a different machine on the network
   * other connections can safely be blocked
-* **inbound**: stellar-core exposes an *unauthenticated* HTTP endpoint on port `HTTP_PORT` (default 11626)
+* **inbound**: epc-core exposes an *unauthenticated* HTTP endpoint on port `HTTP_PORT` (default 11626)
   * it is used by other systems (such as Horizon) to submit transactions (so may have to be exposed to the rest of your internal ips)
   *  query information (info, metrics, ...) for humans and automation
   *  perform administrative commands (schedule upgrades, change log levels, ...)
@@ -155,7 +155,7 @@ if you need to expose this endpoint to other hosts in your local network, it is 
 
 ### Release version
 
-In general you should aim to run the latest [release](https://github.com/stellar/stellar-core/releases) as builds are backward compatible and are cummulative.
+In general you should aim to run the latest [release](https://github.com/epc/epc-core/releases) as builds are backward compatible and are cummulative.
 
 The version number scheme that we follow is `protocol_version.release_number.patch_number`, where
 * `protocol_version` is the maximum protocol version supported by that release (all versions are 100% backward compatible),
@@ -163,33 +163,33 @@ The version number scheme that we follow is `protocol_version.release_number.pat
 * `patch_number` is used when a critical fix has to be deployed 
 
 ### Installing from source
-See the [INSTALL](https://github.com/stellar/stellar-core/blob/master/INSTALL.md) for build instructions.
+See the [INSTALL](https://github.com/epc/epc-core/blob/master/INSTALL.md) for build instructions.
 
 ### Package based Installation
-If you are using Ubuntu 16.04 LTS we provide the latest stable releases of [stellar-core](https://github.com/stellar/stellar-core) and [stellar-horizon](https://github.com/stellar/go/tree/master/services/horizon) in Debian binary package format.
+If you are using Ubuntu 16.04 LTS we provide the latest stable releases of [epc-core](https://github.com/epc/epc-core) and [epc-horizon](https://github.com/epc/go/tree/master/services/horizon) in Debian binary package format.
 
-See [detailed installation instructions](https://github.com/stellar/packages#sdf---packages)
+See [detailed installation instructions](https://github.com/epc/packages#sdf---packages)
 
 ### Container based installation
 Docker images are maintained in a few places, good starting points are:
- * the [quickstart image](https://github.com/stellar/docker-stellar-core-horizon)
- * the [standalone image](https://github.com/stellar/docker-stellar-core). **Warning**: this only tracks the latest master, so you have to find the image based on the [release](https://github.com/stellar/stellar-core/releases) that you want to use.
+ * the [quickstart image](https://github.com/epc/docker-epc-core-horizon)
+ * the [standalone image](https://github.com/epc/docker-epc-core). **Warning**: this only tracks the latest master, so you have to find the image based on the [release](https://github.com/epc/epc-core/releases) that you want to use.
 
 ## Configuring
 
-Before attempting to configure stellar-core, it is highly recommended to first try running a private network or joining the test network. 
+Before attempting to configure epc-core, it is highly recommended to first try running a private network or joining the test network.
 
 ### Configuration basics
-All configuration for stellar-core is done with a TOML file. By default 
-stellar-core loads `./stellar-core.cfg`, but you can specify a different file to load on the command line:
+All configuration for epc-core is done with a TOML file. By default
+epc-core loads `./epc-core.cfg`, but you can specify a different file to load on the command line:
 
-`$ stellar-core --conf betterfile.cfg` 
+`$ epc-core --conf betterfile.cfg`
 
-The [example config](https://github.com/stellar/stellar-core/blob/master/docs/stellar-core_example.cfg) is not a real configuration, but documents all possible configuration elements as well as their default values.
+The [example config](https://github.com/epc/epc-core/blob/master/docs/epc-core_example.cfg) is not a real configuration, but documents all possible configuration elements as well as their default values.
 
-Here is an [example test network config](https://github.com/stellar/docker-stellar-core-horizon/blob/master/testnet/core/etc/stellar-core.cfg) for connecting to the test network.
+Here is an [example test network config](https://github.com/epc/docker-epc-core-horizon/blob/master/testnet/core/etc/epc-core.cfg) for connecting to the test network.
 
-Here is an [example public network config](https://github.com/stellar/docs/blob/master/other/stellar-core-validator-example.cfg) for connecting to the public network.
+Here is an [example public network config](https://github.com/epc/docs/blob/master/other/epc-core-validator-example.cfg) for connecting to the public network.
 
 The examples in this file don't specify `--conf betterfile.cfg` for brevity.
 
@@ -206,7 +206,7 @@ messages will look like they came from you.
 
 Generate a key pair like this:
 
-`$ stellar-core --genseed`
+`$ epc-core --genseed`
 the output will look something like
 ```
 Secret seed: SBAAOHEU4WSWX6GBZ3VOXEGQGWRBJ72ZN3B3MFAJZWXRYGDIWHQO37SY
@@ -227,17 +227,17 @@ watch SCP and see all the data in the network but will not send validation messa
 
 ### Crafting a quorum set
 
-This section describes how to configure the quorum set for a validator and assumes basic understanding of the [Stellar Consensus Protocol](https://www.stellar.org/developers/guides/concepts/scp.html).
+This section describes how to configure the quorum set for a validator and assumes basic understanding of the [epc Consensus Protocol](https://www.epc.org/developers/guides/concepts/scp.html).
 
 #### Validator list
 
 You will find lists of validators in a few places:
-* [list of validators](https://github.com/stellar/docs/blob/master/validators.md)
-* the [Stellar Dashboard](https://dashboard.stellar.org/)
+* [list of validators](https://github.com/epc/docs/blob/master/validators.md)
+* the [epc Dashboard](https://dashboard.epc.org/)
 
 #### Understanding requirements for a good quorum
 
-The way quorum sets are configured is explained in detail in the [example config](https://github.com/stellar/stellar-core/blob/master/docs/stellar-core_example.cfg).
+The way quorum sets are configured is explained in detail in the [example config](https://github.com/epc/epc-core/blob/master/docs/epc-core_example.cfg).
 
 As an administrator what you need to do is ensure that your quorum configuration:
 * is aligned with how you want to trust other nodes on the network
@@ -338,7 +338,7 @@ Recommended steps are for the entity that adds/removes nodes to do so first betw
 
 ## Environment preparation
 
-### stellar-core configuration
+### epc-core configuration
 Cross reference your validator settings, in particular:
 * environment specific settings
   * network passphrase
@@ -346,27 +346,27 @@ Cross reference your validator settings, in particular:
 * quorum set
   * public keys of the validators that you manage grouped properly
 * seed defined if validating
-* [Automatic maintenance](#cursors-and-automatic-maintenance) configured properly, especially when stellar-core is used in conjunction with a downstream system like Horizon.
+* [Automatic maintenance](#cursors-and-automatic-maintenance) configured properly, especially when epc-core is used in conjunction with a downstream system like Horizon.
 
 ### Database and local state
 
-After configuring your [database](#database) and [buckets](#buckets) settings, when running stellar-core for the first time, you must initialize the database:
+After configuring your [database](#database) and [buckets](#buckets) settings, when running epc-core for the first time, you must initialize the database:
 
-`$ stellar-core --newdb`
+`$ epc-core --newdb`
 
 This command will initialize the database as well as the bucket directory and then exit. 
 
 You can also use this command if your DB gets corrupted and you want to restart it from scratch. 
 
 #### Database
-Stellar-core stores the state of the ledger in a SQL database.
+epc-core stores the state of the ledger in a SQL database.
 
 This DB should either be a SQLite database or, for larger production instances, a separate PostgreSQL server.
 
 *Note: Horizon currently depends on using PostgreSQL.*
 
 For how to specify the database, 
-see the [example config](https://github.com/stellar/stellar-core/blob/master/docs/stellar-core_example.cfg).
+see the [example config](https://github.com/epc/epc-core/blob/master/docs/epc-core_example.cfg).
 
 ##### Cursors and automatic maintenance
 
@@ -376,22 +376,22 @@ If not managed properly those tables will grow without bounds. To avoid this, a 
 
 The settings that control the automatic maintenance behavior are: `AUTOMATIC_MAINTENANCE_PERIOD`,  `AUTOMATIC_MAINTENANCE_COUNT` and `KNOWN_CURSORS`.
 
-By default, stellar-core will perform this automatic maintenance, so be sure to disable it until you have done the appropriate data ingestion in downstream systems (Horizon for example sometimes needs to reingest data).
+By default, epc-core will perform this automatic maintenance, so be sure to disable it until you have done the appropriate data ingestion in downstream systems (Horizon for example sometimes needs to reingest data).
 
 If you need to regenerate the meta data, the simplest way is to replay ledgers for the range you're interested in after (optionally) clearing the database with `newdb`.
 
 #### Buckets
-Stellar-core stores a duplicate copy of the ledger in the form of flat XDR files 
+epc-core stores a duplicate copy of the ledger in the form of flat XDR files
 called "buckets." These files are placed in a directory specified in the config 
 file as `BUCKET_DIR_PATH`, which defaults to `buckets`. The bucket files are used
  for hashing and transmission of ledger differences to history archives. 
 
 Buckets should be stored on a fast local disk with sufficient space to store several times the size of the current ledger. 
  
- For the most part, the contents of both directories can be ignored as they are managed by stellar-core.
+ For the most part, the contents of both directories can be ignored as they are managed by epc-core.
 
 ### History archives
-Stellar-core normally interacts with one or more "history archives," which are 
+epc-core normally interacts with one or more "history archives," which are
 configurable facilities for storing and retrieving flat files containing history 
 checkpoints: bucket files and history logs. History archives are usually off-site 
 commodity storage services such as Amazon S3, Google Cloud Storage, 
@@ -399,10 +399,10 @@ Azure Blob Storage, or custom SCP/SFTP/HTTP servers.
 
 Use command templates in the config file to give the specifics of which 
 services you will use and how to access them. 
-The [example config](https://github.com/stellar/stellar-core/blob/master/docs/stellar-core_example.cfg) 
+The [example config](https://github.com/epc/epc-core/blob/master/docs/epc-core_example.cfg)
 shows how to configure a history archive through command templates. 
 
-While it is possible to run a stellar-core node with no configured history 
+While it is possible to run a epc-core node with no configured history
 archives, it will be _severely limited_, unable to participate fully in a 
 network, and likely unable to acquire synchronization at all. At the very 
 least, if you are joining an existing network in a read-only capacity, you 
@@ -414,7 +414,7 @@ Archive sections can also be configured with `put` and `mkdir` commands to
  cause the instance to publish to that archive (for nodes configured as [archiver nodes](#archiver-nodes) or [full validators](#full-validators)).
 
 The very first time you want to use your archive *before starting your node* you need to initialize it with:
-`$ stellar-core --newhist <historyarchive>`
+`$ epc-core --newhist <historyarchive>`
 
 **IMPORTANT:**
  * make sure that you configure both `put` and `mkdir` if `put` doesn't
@@ -433,24 +433,24 @@ In no particular order:
 
 ## Starting your node
 
-After having configured your node and its environment, you're ready to start stellar-core.
+After having configured your node and its environment, you're ready to start epc-core.
 
 This can be done with a command equivalent to
 
-`$ stellar-core`
+`$ epc-core`
 
 At this point you're ready to observe core's activity as it joins the network.
 
-Review the [logging](#logging) section to get yourself familiar with the output of stellar-core.
+Review the [logging](#logging) section to get yourself familiar with the output of epc-core.
 
 ### Interacting with your instance
-While running, interaction with stellar-core is done via an administrative 
+While running, interaction with epc-core is done via an administrative
 HTTP endpoint. Commands can be submitted using command-line HTTP tools such 
 as `curl`, or by running a command such as
 
-`$ stellar-core -c <command>`
+`$ epc-core -c <command>`
 
-The endpoint is [not intended to be exposed to the public internet](#interaction-with-other-internal-systems). It's typically accessed by administrators, or by a mid-tier application to submit transactions to the Stellar network. 
+The endpoint is [not intended to be exposed to the public internet](#interaction-with-other-internal-systems). It's typically accessed by administrators, or by a mid-tier application to submit transactions to the epc network.
 
 See [commands](./commands.md) for a description of the available commands.
 
@@ -516,7 +516,7 @@ When the node is done catching up, its state will change to
 ```
 
 ## Logging
-Stellar-core sends logs to standard output and `stellar-core.log` by default, 
+epc-core sends logs to standard output and `epc-core.log` by default,
 configurable as `LOG_FILE_PATH`.
 
  Log messages are classified by progressive _priority levels_:
@@ -526,14 +526,14 @@ configurable as `LOG_FILE_PATH`.
 The log level can be controlled by configuration, the `-ll` command-line flag 
 or adjusted dynamically by administrative (HTTP) commands. Run:
 
-`$ stellar-core -c "ll?level=debug"`
+`$ epc-core -c "ll?level=debug"`
 
 against a running system.
 Log levels can also be adjusted on a partition-by-partition basis through the 
 administrative interface.
  For example the history system can be set to DEBUG-level logging by running:
 
-`$ stellar-core -c "ll?level=debug&partition=history"` 
+`$ epc-core -c "ll?level=debug&partition=history"`
 
 against a running system.
  The default log level is `INFO`, which is moderately verbose and should emit 
@@ -545,7 +545,7 @@ against a running system.
 Information provided here can be used for both human operators and programmatic access.
 
 ### General node information
-Run `$ stellar-core --c 'info'`
+Run `$ epc-core --c 'info'`
 The output will look something like
 ```json
  {
@@ -607,7 +607,7 @@ The state of a fresh node (reset with `newdb`), will look something like this:
 ```
 
 Additional fields typically used by downstream systems:
-* `build` is the build number for this stellar-core instance
+* `build` is the build number for this epc-core instance
 * `network` is the network passphrase that this core instance is connecting to
 * `protocol_version` is the maximum version of the protocol that this instance recognizes
 
@@ -624,7 +624,7 @@ The `peers` command returns information on the peers the instance is connected t
 
 This list is the result of both inbound connections from other peers and outbound connections from this node to other peers.
 
-`$ stellar-core --c 'peers'`
+`$ epc-core --c 'peers'`
 
 ```json
 {
@@ -661,7 +661,7 @@ The `quorum` command allows to diagnose problems with the quorum set of the loca
 
 Run
 
-`$ stellar-core --c 'quorum'`
+`$ epc-core --c 'quorum'`
 
 The output looks something like:
 ```json
@@ -702,7 +702,7 @@ as a whole will not be able to reach consensus (and the opposite is true, the ne
 may fail because of a different set of validators failing).
 
 You can get a sense of the quorum set health of a different node by doing
-`$ stellar-core --c 'quorum?node=$sdf1` or `$ stellar-core --c 'quorum?node=@GABCDE` 
+`$ epc-core --c 'quorum?node=$sdf1` or `$ epc-core --c 'quorum?node=@GABCDE`
 
 Overall network health can be evaluated by walking through all nodes and looking at their health. Note that this is only an approximation as remote nodes may not have received the same messages (in particular: `missing` for other nodes is not reliable).
 
@@ -769,9 +769,9 @@ For more information look at [`docs/versioning.md`](../versioning.md).
 
 Example here is to upgrade the protocol version to version 9 on January-31-2018.
 
-1. `$ stellar-core -c 'upgrades?mode=set&upgradetime=2018-01-31T20:00:00Z&protocolversion=9'`
+1. `$ epc-core -c 'upgrades?mode=set&upgradetime=2018-01-31T20:00:00Z&protocolversion=9'`
 
-2. `$ stellar-core -c info`
+2. `$ epc-core -c info`
 At this point `info` will tell you that the node is setup to vote for this upgrade:
 ```json
       "status" : [
@@ -790,22 +790,22 @@ This section contains information that is useful to know but that should not sto
 
 ### Runtime information: start and stop
 
-Stellar-core can be started directly from the command line, or through a supervision 
+epc-core can be started directly from the command line, or through a supervision
 system such as `init`, `upstart`, or `systemd`.
 
-Stellar-core can be gracefully exited at any time by delivering `SIGINT` or
+epc-core can be gracefully exited at any time by delivering `SIGINT` or
  pressing `CTRL-C`. It can be safely, forcibly terminated with `SIGTERM` or
   `SIGKILL`. The latter may leave a stale lock file in the `BUCKET_DIR_PATH`,
    and you may need to remove the file before it will restart. 
    Otherwise, all components are designed to recover from abrupt termination.
 
-Stellar-core can also be packaged in a container system such as Docker, so long 
+epc-core can also be packaged in a container system such as Docker, so long
 as `BUCKET_DIR_PATH` and the database are stored on persistent volumes. For an
-example, see [docker-stellar-core](https://github.com/stellar/docker-stellar-core-horizon).
+example, see [docker-epc-core](https://github.com/epc/docker-epc-core-horizon).
 
 ### In depth architecture
 
-[architecture.md](https://github.com/stellar/stellar-core/blob/master/docs/architecture.md) 
-  describes how stellar-core is structured internally, how it is intended to be 
+[architecture.md](https://github.com/epc/epc-core/blob/master/docs/architecture.md)
+  describes how epc-core is structured internally, how it is intended to be
   deployed, and the collection of servers and services needed to get the full 
   functionality and performance.

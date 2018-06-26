@@ -8,7 +8,7 @@ When submitting changes that may impact the network's performance, we require to
 
 * Execution (real) time
 * CPU utilization at various interval, and/or percentile
-* Disk I/O at the operating system level (ie: unit is typically in blocks/s), both reads and writes of the stellar-core process
+* Disk I/O at the operating system level (ie: unit is typically in blocks/s), both reads and writes of the epc-core process
 * SQL: rate of operations (read and writes), Disk I/O of the SQL process if available (PostgreSQL)
 * Memory utilization
 
@@ -75,7 +75,7 @@ Inject transactions, wait until they are incorporated into a ledger.
 This scenario looks at the overhead of flooding transactions and SCP messages (required for transactions to be included in a ledger).
 
 ### Built-in load generator
-stellar-core has a built-in load generator that allows to inject transactions on private networks.
+epc-core has a built-in load generator that allows to inject transactions on private networks.
 See the `generateload` [command](docs/software/commands.md) for more detail.
 
 ## Micro-benchmarks
@@ -164,7 +164,7 @@ export LDFLAGS = -ltcmalloc_minimal
 
 Gather data:
 ```
-perf record ./stellar-core ...
+perf record ./epc-core ...
 ```
 
 Generate reports

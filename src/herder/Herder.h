@@ -1,20 +1,20 @@
 #pragma once
 
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
 #include "TxSetFrame.h"
 #include "Upgrades.h"
 #include "lib/json/json-forwards.h"
-#include "overlay/StellarXDR.h"
+#include "overlay/epcXDR.h"
 #include "scp/SCP.h"
 #include "util/Timer.h"
 #include <functional>
 #include <memory>
 #include <string>
 
-namespace stellar
+namespace epc
 {
 class Application;
 class Peer;
@@ -108,7 +108,7 @@ class Herder
     virtual bool recvTxSet(Hash const& hash, TxSetFrame const& txset) = 0;
     // We are learning about a new transaction.
     virtual TransactionSubmitStatus recvTransaction(TransactionFramePtr tx) = 0;
-    virtual void peerDoesntHave(stellar::MessageType type,
+    virtual void peerDoesntHave(epc::MessageType type,
                                 uint256 const& itemID, PeerPtr peer) = 0;
     virtual TxSetFramePtr getTxSet(Hash const& hash) = 0;
     virtual SCPQuorumSetPtr getQSet(Hash const& qSetHash) = 0;

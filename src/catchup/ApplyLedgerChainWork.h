@@ -1,4 +1,4 @@
-// Copyright 2015 Stellar Development Foundation and contributors. Licensed
+// Copyright 2015 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -8,15 +8,15 @@
 #include "ledger/LedgerRange.h"
 #include "util/XDRStream.h"
 #include "work/Work.h"
-#include "xdr/Stellar-SCP.h"
-#include "xdr/Stellar-ledger.h"
+#include "xdr/epc-SCP.h"
+#include "xdr/epc-ledger.h"
 
 namespace medida
 {
 class Meter;
 }
 
-namespace stellar
+namespace epc
 {
 
 class TmpDir;

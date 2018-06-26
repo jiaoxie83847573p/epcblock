@@ -1,4 +1,4 @@
-// Copyright 2017 Stellar Development Foundation and contributors. Licensed
+// Copyright 2017 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -16,7 +16,7 @@
 #include "util/optional.h"
 #include <xdrpp/marshal.h>
 
-using namespace stellar;
+using namespace epc;
 
 struct LedgerUpgradeableData
 {
@@ -504,7 +504,7 @@ TEST_CASE("Ledger Manager applies upgrades properly", "[upgrades]")
             LedgerManager::GENESIS_LEDGER_BASE_RESERVE);
 
     auto executeUpgrades = [&](xdr::xvector<UpgradeType, 6> const& upgrades) {
-        StellarValue sv{txSet->getContentsHash(), 2, upgrades, 0};
+        epcValue sv{txSet->getContentsHash(), 2, upgrades, 0};
         LedgerCloseData ledgerData(lcl.header.ledgerSeq + 1, txSet, sv);
         app->getLedgerManager().closeLedger(ledgerData);
         return app->getLedgerManager().getLastClosedLedgerHeader();

@@ -1,13 +1,13 @@
 #pragma once
 
-// Copyright 2017 Stellar Development Foundation and contributors. Licensed
+// Copyright 2017 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
 #include "herder/Herder.h"
 #include "herder/TxSetFrame.h"
 #include "scp/SCPDriver.h"
-#include "xdr/Stellar-ledger.h"
+#include "xdr/epc-ledger.h"
 
 namespace medida
 {
@@ -16,7 +16,7 @@ class Meter;
 class Timer;
 }
 
-namespace stellar
+namespace epc
 {
 class Application;
 class HerderImpl;
@@ -25,7 +25,7 @@ class PendingEnvelopes;
 class SCP;
 class Upgrades;
 class VirtualTimer;
-struct StellarValue;
+struct epcValue;
 struct SCPEnvelope;
 
 class HerderSCPDriver : public SCPDriver
@@ -34,8 +34,8 @@ class HerderSCPDriver : public SCPDriver
     struct ConsensusData
     {
         uint64_t mConsensusIndex;
-        StellarValue mConsensusValue;
-        ConsensusData(uint64_t index, StellarValue const& b)
+        epcValue mConsensusValue;
+        ConsensusData(uint64_t index, epcValue const& b)
             : mConsensusIndex(index), mConsensusValue(b)
         {
         }
@@ -64,7 +64,7 @@ class HerderSCPDriver : public SCPDriver
         return mLastTrackingSCP.get();
     }
 
-    void restoreSCPState(uint64_t index, StellarValue const& value);
+    void restoreSCPState(uint64_t index, epcValue const& value);
 
     // the ledger index that was last externalized
     uint32
@@ -117,8 +117,8 @@ class HerderSCPDriver : public SCPDriver
 
     // Submit a value to consider for slotIndex
     // previousValue is the value from slotIndex-1
-    void nominate(uint64_t slotIndex, StellarValue const& value,
-                  TxSetFramePtr proposedSet, StellarValue const& previousValue);
+    void nominate(uint64_t slotIndex, epcValue const& value,
+                  TxSetFramePtr proposedSet, epcValue const& previousValue);
 
     SCPQuorumSetPtr getQSet(Hash const& qSetHash) override;
 
@@ -212,7 +212,7 @@ class HerderSCPDriver : public SCPDriver
     void stateChanged();
 
     SCPDriver::ValidationLevel
-    validateValueHelper(uint64_t slotIndex, StellarValue const& sv) const;
+    validateValueHelper(uint64_t slotIndex, epcValue const& sv) const;
 
     // returns true if the local instance is in a state compatible with
     // this slot

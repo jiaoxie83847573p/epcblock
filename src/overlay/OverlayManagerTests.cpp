@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -19,12 +19,12 @@
 
 #include <soci.h>
 
-using namespace stellar;
+using namespace epc;
 using namespace std;
 using namespace soci;
 using namespace txtest;
 
-namespace stellar
+namespace epc
 {
 
 class PeerStub : public Peer
@@ -162,7 +162,7 @@ class OverlayManagerTests
         auto c = TestAccount{*app, getAccount("c")};
         auto d = TestAccount{*app, getAccount("d")};
 
-        StellarMessage AtoC = a.tx({payment(b, 10)})->toStellarMessage();
+        epcMessage AtoC = a.tx({payment(b, 10)})->toepcMessage();
         auto i = 0;
         for (auto p : pm.mAuthenticatedPeers)
             if (i++ == 2)
@@ -172,7 +172,7 @@ class OverlayManagerTests
         REQUIRE(sentCounts(pm) == expected);
         pm.broadcastMessage(AtoC);
         REQUIRE(sentCounts(pm) == expected);
-        StellarMessage CtoD = c.tx({payment(d, 10)})->toStellarMessage();
+        epcMessage CtoD = c.tx({payment(d, 10)})->toepcMessage();
         pm.broadcastMessage(CtoD);
         vector<int> expectedFinal{2, 2, 1, 2, 2};
         REQUIRE(sentCounts(pm) == expectedFinal);

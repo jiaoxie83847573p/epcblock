@@ -1,4 +1,4 @@
-// Copyright 2016 Stellar Development Foundation and contributors. Licensed
+// Copyright 2016 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -16,7 +16,7 @@
 using namespace std;
 using namespace soci;
 
-namespace stellar
+namespace epc
 {
 const char* DataFrame::kSQLCreateStatement1 =
     "CREATE TABLE accountdata"
@@ -61,7 +61,7 @@ DataFrame::getName() const
     return mData.dataName;
 }
 
-stellar::DataValue const&
+epc::DataValue const&
 DataFrame::getValue() const
 {
     return mData.dataValue;

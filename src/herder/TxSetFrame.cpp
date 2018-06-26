@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -17,7 +17,7 @@
 
 #include "xdrpp/printer.h"
 
-namespace stellar
+namespace epc
 {
 
 using namespace std;
@@ -379,4 +379,4 @@ TxSetFrame::toXDR(TransactionSet& txSet)
     }
     txSet.previousLedgerHash = mPreviousLedgerHash;
 }
-} // namespace stellar
+} // namespace epc

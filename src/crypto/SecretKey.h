@@ -1,18 +1,18 @@
 #pragma once
 
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
 #include "crypto/KeyUtils.h"
 #include "util/XDROperators.h"
-#include "xdr/Stellar-types.h"
+#include "xdr/epc-types.h"
 
 #include <array>
 #include <functional>
 #include <ostream>
 
-namespace stellar
+namespace epc
 {
 
 class ByteSlice;
@@ -122,8 +122,8 @@ Hash random();
 
 namespace std
 {
-template <> struct hash<stellar::PublicKey>
+template <> struct hash<epc::PublicKey>
 {
-    size_t operator()(stellar::PublicKey const& x) const noexcept;
+    size_t operator()(epc::PublicKey const& x) const noexcept;
 };
 }

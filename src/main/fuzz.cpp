@@ -1,4 +1,4 @@
-// Copyright 2015 Stellar Development Foundation and contributors. Licensed
+// Copyright 2015 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -7,7 +7,7 @@
 #include "crypto/SHA.h"
 #include "main/Application.h"
 #include "main/Config.h"
-#include "main/StellarCoreVersion.h"
+#include "main/epcCoreVersion.h"
 #include "overlay/LoopbackPeer.h"
 #include "overlay/OverlayManager.h"
 #include "overlay/TCPPeer.h"
@@ -30,17 +30,17 @@
  * It has two modes:
  *
  *   - In --genfuzz mode it spits out a small file containing a handful of
- *     random StellarMessages. This is the mode you use to generate seed data
+ *     random epcMessages. This is the mode you use to generate seed data
  *     for the external fuzzer's corpus.
  *
  *   - In --fuzz mode it reads back a file and appplies it to a pair of of
- *     stellar-cores in loopback mode, cranking the I/O loop to simulate
+ *     epc-cores in loopback mode, cranking the I/O loop to simulate
  *     receiving the messages one by one. It exits when it's read the input.
  *     This is the mode the external fuzzer will run its mutant inputs through.
  *
  */
 
-namespace stellar
+namespace epc
 {
 
 struct CfgDirGuard
@@ -65,7 +65,7 @@ struct CfgDirGuard
 };
 
 std::string
-msgSummary(StellarMessage const& m)
+msgSummary(epcMessage const& m)
 {
     xdr::detail::Printer p(0);
     xdr::archive(p, m.type(), nullptr);
@@ -73,7 +73,7 @@ msgSummary(StellarMessage const& m)
 }
 
 bool
-tryRead(XDRInputFileStream& in, StellarMessage& m)
+tryRead(XDRInputFileStream& in, epcMessage& m)
 {
     try
     {
@@ -97,7 +97,7 @@ fuzz(std::string const& filename, el::Level logLevel,
 {
     Logging::setFmt("<fuzz>", false);
     Logging::setLogLevel(logLevel, nullptr);
-    LOG(INFO) << "Fuzzing stellar-core " << STELLAR_CORE_VERSION;
+    LOG(INFO) << "Fuzzing epc-core " << epc_CORE_VERSION;
     LOG(INFO) << "Fuzz input is in " << filename;
 
     Config cfg1, cfg2;
@@ -142,7 +142,7 @@ restart:
 
     XDRInputFileStream in(MAX_MESSAGE_SIZE);
     in.open(filename);
-    StellarMessage msg;
+    epcMessage msg;
     size_t i = 0;
     while (tryRead(in, msg))
     {
@@ -176,12 +176,12 @@ genfuzz(std::string const& filename)
     LOG(INFO) << "Writing " << n << "-message random fuzz file " << filename;
     XDROutputFileStream out;
     out.open(filename);
-    autocheck::generator<StellarMessage> gen;
+    autocheck::generator<epcMessage> gen;
     for (size_t i = 0; i < n; ++i)
     {
         try
         {
-            StellarMessage m(gen(10));
+            epcMessage m(gen(10));
             out.writeOne(m);
             LOG(INFO) << "Message " << i << ": " << msgSummary(m);
         }

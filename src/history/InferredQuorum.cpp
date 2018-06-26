@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace stellar
+namespace epc
 {
 
 void

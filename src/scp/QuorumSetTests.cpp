@@ -1,4 +1,4 @@
-// Copyright 2014 Stellar Development Foundation and contributors. Licensed
+// Copyright 2014 epc Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -7,9 +7,9 @@
 #include "crypto/SecretKey.h"
 #include "lib/catch.hpp"
 #include "scp/QuorumSetUtils.h"
-#include "xdr/Stellar-SCP.h"
+#include "xdr/epc-SCP.h"
 
-namespace stellar
+namespace epc
 {
 
 TEST_CASE("sane quorum set", "[scp][quorumset]")
