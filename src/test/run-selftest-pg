@@ -94,7 +94,7 @@ else
     echo "PostgreSQL enabled for tests using existing database cluster"
 fi
 if [ "$ALL_VERSIONS" != "" ]; then
-    ./stellar-core -ll fatal --test -f $TEST_SPEC_PATH --base-instance $BASE_INSTANCE --all-versions -a -r simple 2> /dev/null
+    ./epc-core -ll fatal --test -f $TEST_SPEC_PATH --base-instance $BASE_INSTANCE --all-versions -a -r simple 2> /dev/null
 else
-    ./stellar-core -ll fatal --test -f $TEST_SPEC_PATH --base-instance $BASE_INSTANCE -a -r simple 2> /dev/null
+    ./epc-core -ll fatal --test -f $TEST_SPEC_PATH --base-instance $BASE_INSTANCE -a -r simple 2> /dev/null
 fi
