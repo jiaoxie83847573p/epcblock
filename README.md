@@ -1,18 +1,18 @@
-[![Build Status](https://travis-ci.org/stellar/stellar-core.svg?branch=auto)](https://travis-ci.org/stellar/stellar-core)
+[![Build Status](https://travis-ci.org/stellar/EPC-BLOCK.svg?branch=auto)](https://travis-ci.org/stellar/EPC-BLOCK)
 
 
-# stellar-core
+# EPC-BLOCK
 
-Stellar-core is a replicated state machine that maintains a local copy of a cryptographic ledger and processes transactions against it, in consensus with a set of peers.
-It implements the [Stellar Consensus Protocol](https://github.com/stellar/stellar-core/blob/master/src/scp/readme.md), a _federated_ consensus protocol.
+EPC-BLOCK is a replicated state machine that maintains a local copy of a cryptographic ledger and processes transactions against it, in consensus with a set of peers.
+It implements the [Stellar Consensus Protocol](https://github.com/stellar/EPC-BLOCK/blob/master/src/scp/readme.md), a _federated_ consensus protocol.
 It is written in C++11 and runs on Linux, OSX and Windows.
-Learn more by reading the [overview document](https://github.com/stellar/stellar-core/blob/master/docs/readme.md).
+Learn more by reading the [overview document](https://github.com/stellar/EPC-BLOCK/blob/master/docs/readme.md).
 
 # Documentation
 
 Documentation of the code's layout and abstractions, as well as for the
 functionality available, can be found in
-[`./docs`](https://github.com/stellar/stellar-core/tree/master/docs).
+[`./docs`](https://github.com/stellar/EPC-BLOCK/tree/master/docs).
 
 # Installation
 
@@ -25,26 +25,26 @@ See [Contributing](./CONTRIBUTING.md)
 # Running tests
 
 run tests with:
-  `src/stellar-core --test`
+  `src/EPC-BLOCK --test`
 
 run one test with:
-  `src/stellar-core --test  testName`
+  `src/EPC-BLOCK --test  testName`
 
 run one test category with:
-  `src/stellar-core --test '[categoryName]'`
+  `src/EPC-BLOCK --test '[categoryName]'`
 
 Categories (or tags) can be combined: AND-ed (by juxtaposition) or OR-ed (by comma-listing).
 
 Tests tagged as [.] or [hide] are not part of the default test test.
 
 supported test options can be seen with
-  `src/stellar-core --test --help`
+  `src/EPC-BLOCK --test --help`
 
 display tests timing information:
-  `src/stellar-core --test -d yes '[categoryName]'`
+  `src/EPC-BLOCK --test -d yes '[categoryName]'`
 
 xml test output (includes nested section information):
-  `src/stellar-core --test -r xml '[categoryName]'`
+  `src/EPC-BLOCK --test -r xml '[categoryName]'`
 
 # Running tests against postgreSQL
 
@@ -84,8 +84,8 @@ will partition the history tests into 4 parts then run parts 0, 1, and 3.
 We adopt the convention of tagging a stress-test for subsystem foo as [foo-stress][stress][hide].
 
 Then, running
-* `stellar-core --test [stress]` will run all the stress tests,
-* `stellar-core --test [foo-stress]` will run the stress tests for subsystem foo alone, and
-* neither `stellar-core --test` nor `stellar-core --test [foo]` will run stress tests.
+* `EPC-BLOCK --test [stress]` will run all the stress tests,
+* `EPC-BLOCK --test [foo-stress]` will run the stress tests for subsystem foo alone, and
+* neither `EPC-BLOCK --test` nor `EPC-BLOCK --test [foo]` will run stress tests.
 
 
